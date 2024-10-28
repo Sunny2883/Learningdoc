@@ -59,8 +59,10 @@ Step 3:
 
 set crontab using crontab -e command on your server where script is
 set the crontab according to your need 
-            # m h  dom mon dow   command
-            #*/5 * * * * /home/azureuser/backup_script.sh >> /home/azureuser/backup_directory/backup_log.txt 2>&1
+          
+            
+              # m h  dom mon dow   command
+              #*/5 * * * * /home/azureuser/backup_script.sh >> /home/azureuser/backup_directory/backup_log.txt 2>&1
 
 
 
