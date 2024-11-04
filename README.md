@@ -154,6 +154,63 @@ Solution: Adjusted the deployment_configuration settings:
 minimum_healthy_percent: Specifies the lower limit on the number of healthy tasks during a deployment.
 maximum_percent: Specifies the upper limit on the number of tasks that can run during a deployment.
 Result: Making these adjustments enabled successful zero downtime deployment.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Steps to Connect to Azure PostgreSQL Flexible Server 
+
+Since pgAdmin does not support direct tunneling through Azure Bastion, you'll need to set up port forwarding through an SSH tunnel. Follow these steps:
+
+Step 1: Set Up an SSH VM in the VNet
+Create a Virtual Machine (VM):
+
+Deploy a small Linux VM (e.g., Ubuntu) in the same VNet and subnet where your PostgreSQL Flexible Server is located. This VM will act as the intermediary for the SSH tunnel.
+Ensure the VM has SSH access configured.
+Install PostgreSQL Client on the VM (optional):
+
+Log into the VM using Azure Bastion and install the PostgreSQL client to verify connectivity with the database.
+Run:
+
+            sudo apt update
+            sudo apt install postgresql-client
+            
+Test connectivity (replace <db-hostname>, <username>, and <db-name>):
+
+             psql -h <db-hostname> -U <username> -d <db-name>
+             
+Step 2: Create an SSH Tunnel for pgAdmin Access
+To access the database from your local machine using pgAdmin, you’ll need to set up port forwarding through SSH.
+
+SSH Tunnel Command:
+
+Use an SSH client (e.g., OpenSSH) on your local machine to create a tunnel through the VM to the PostgreSQL Flexible Server.
+Replace <vm-public-ip>, <vm-username>, <db-private-ip>, and <local-port> (e.g., 5433):
+
+
+              ssh -i C:\path\to\your\private_key -L <local-port>:<db-private-ip>:5432 <vm-username>@<vm-public-ip>
+
+
+local-port: This is the port on your local machine where pgAdmin will connect (e.g., 5433).
+db-private-ip: The private IP address of your PostgreSQL Flexible Server.
+vm-public-ip: The public IP address of your SSH VM.
+Keep the Tunnel Open:
+
+Leave this SSH session open, as it establishes the connection for pgAdmin to connect through.
+Step 3: Configure pgAdmin to Connect via the SSH Tunnel
+Open pgAdmin on your local machine.
+Create a New Server in pgAdmin:
+Go to File > Add New Server in pgAdmin.
+Configure Connection Settings:
+Name: Provide a name for the connection.
+Connection tab:
+Host: localhost
+Port: Use the local-port from the SSH tunnel (e.g., 5433).
+Username: Your PostgreSQL database username.
+Password: Your PostgreSQL database password.
+Save and Connect
+
+
+
 
 
 
