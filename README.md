@@ -214,3 +214,66 @@ Save and Connect
 
 
 
+Sign in as a root user. The hash symbol (#) is the default command prompt.
+
+To change the directory, run this command:
+
+cd /etc/ssl/certs
+
+Check whether the Symantec root CA certificate is present:
+
+ls VeriSign_Class_3_Public_Primary_Certification_Authority_G5.pem
+
+If the Symantec root CA certificate isn't found, run the following command to download the file. Check for any errors and follow recommended actions for network failures.
+
+               wget https://docs.broadcom.com/docs-and-downloads/content/dam/symantec/docs/other-resources/verisign-class-3-public-primary-certification-authority-g5-en.pem -O VeriSign_Class_3_Public_Primary_Certification_Authority_G5.pem
+
+Check whether the Baltimore root CA certificate is present:
+
+               ls Baltimore_CyberTrust_Root.pem
+
+If the Baltimore root CA certificate isn't found, run this command to download the certificate:
+
+                 wget https://www.digicert.com/CACerts/BaltimoreCyberTrustRoot.crt.pem -O Baltimore_CyberTrust_Root.pem
+
+Check whether the DigiCert_Global_Root_CA certificate is present:
+
+               ls DigiCert_Global_Root_CA.pem
+
+If the DigiCert_Global_Root_CA isn't found, run the following commands to download the certificate:
+
+
+                wget http://www.digicert.com/CACerts/DigiCertGlobalRootCA.crt
+
+                openssl x509 -in DigiCertGlobalRootCA.crt -inform der -outform pem -out DigiCert_Global_Root_CA.pem
+To update the certificate subject hashes for the newly downloaded certificates, run the rehash script:
+
+                c_rehash
+
+To check whether the subject hashes as symlinks were created for the certificates, run these commands:
+
+            ls -l | grep Baltimore
+
+            ls -l | grep VeriSign_Class_3_Public_Primary_Certification_Authority_G5
+
+             ls -l | grep DigiCert_Global_Root
+
+Create a copy of the file VeriSign_Class_3_Public_Primary_Certification_Authority_G5.pem with filename b204d74a.0:
+
+              cp VeriSign_Class_3_Public_Primary_Certification_Authority_G5.pem b204d74a.0
+
+Create a copy of the file Baltimore_CyberTrust_Root.pem with filename 653b494a.0:
+
+              cp Baltimore_CyberTrust_Root.pem 653b494a.0
+
+Create a copy of the file DigiCert_Global_Root_CA.pem with filename 3513523f.0:
+
+             cp DigiCert_Global_Root_CA.pem 3513523f.0
+
+Check that the files are present:
+
+              ls -l 653b494a.0 b204d74a.0 3513523f.0
+
+
+
+
