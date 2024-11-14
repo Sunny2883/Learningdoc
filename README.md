@@ -271,7 +271,7 @@ Create a copy of the file DigiCert_Global_Root_CA.pem with filename 3513523f.0:
              cp DigiCert_Global_Root_CA.pem 3513523f.0
 
 Check that the files are present:
-
+          ls -l 653b494a.0 b204d74a.0 3513523f.0
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 <h1>Install azcopy on linux server</h1>
@@ -286,7 +286,7 @@ Check that the files are present:
       azcopy --version
 
 
-              ls -l 653b494a.0 b204d74a.0 3513523f.0
+             
 
 
 
