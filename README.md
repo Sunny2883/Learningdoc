@@ -272,6 +272,18 @@ Create a copy of the file DigiCert_Global_Root_CA.pem with filename 3513523f.0:
 
 Check that the files are present:
 
+
+
+<h1>Install azcopy on linux server</h1>
+      wget -O azcopy.tar.gz "https://aka.ms/downloadazcopy-v10-linux"
+# Extract the downloaded tar.gz file
+      tar -xvf azcopy.tar.gz
+# Move the azcopy binary to /usr/local/bin
+      sudo mv ./azcopy_linux_amd64_*/azcopy /usr/local/bin/
+# verify installation
+      azcopy --version
+
+
               ls -l 653b494a.0 b204d74a.0 3513523f.0
 
 
